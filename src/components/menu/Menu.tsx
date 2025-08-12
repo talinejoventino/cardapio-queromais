@@ -38,18 +38,24 @@ export default function Menu({ categories, items }: Props) {
   return (
     <>
       <Tabs value={tab} onValueChange={setTab} className="w-full">
-        <TabsList className="flex w-full overflow-x-auto">
-          {cats.map((c) => (
-            <TabsTrigger key={c.slug} value={c.slug} className="whitespace-nowrap">
-              {c.name}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="w-full overflow-x-auto no-scrollbar scrollbar-hide">
+          <TabsList className="inline-flex min-w-max gap-1 px-2 w-full">
+            {cats.map((c) => (
+              <TabsTrigger
+                key={c.slug}
+                value={c.slug}
+                className="whitespace-nowrap flex-shrink-0"
+              >
+                {c.name}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
       </Tabs>
 
       <div className="mt-4 flex gap-3 items-center">
         <Input
-          placeholder="Buscar (ex.: coxinha, 1kg, 500g...)"
+          placeholder="Buscar (ex.: coxinha, bolinho...)"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           className="w-full"

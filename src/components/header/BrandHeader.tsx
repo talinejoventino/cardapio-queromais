@@ -19,32 +19,28 @@ export default function BrandHeader() {
             />
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          {/* <a
-            href="https://wa.me/55XXXXXXXXXXX"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-white text-[#A9672D] font-semibold px-4 py-2 rounded-lg shadow hover:bg-white/90 transition"
-          >
-            Peça Agora
-          </a> */}
-          <CartButton/>
-          <a
-            href="https://wa.me/55XXXXXXXXXXX"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-white/80"
-          >
-            <FaWhatsapp size={24} />
-          </a>
-          <a
-            href="https://instagram.com/produtosqueromaiis"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-white/80"
-          >
-            <FaInstagram size={24} />
-          </a>
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="mb-2 sm:mb-0">
+            <CartButton/>
+          </div>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://wa.me/5581992876549"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-white/80"
+            >
+              <FaWhatsapp size={24} />
+            </a>
+            <a
+              href="https://instagram.com/produtosqueromaiis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-white/80"
+            >
+              <FaInstagram size={24} />
+            </a>
+          </div>
         </div>
       </div>
     </header>

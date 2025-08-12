@@ -14,7 +14,7 @@ export default function CartSheet({ open, onOpenChange }: { open: boolean; onOpe
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-[420px] sm:w-[480px] flex flex-col">
+      <SheetContent className="w-full max-w-[90vw] sm:max-w-[420px] flex flex-col h-full overflow-hidden">
         <SheetHeader>
           <SheetTitle>Seu Carrinho</SheetTitle>
         </SheetHeader>
@@ -63,7 +63,7 @@ export default function CartSheet({ open, onOpenChange }: { open: boolean; onOpe
             </div>
 
             <div className="flex gap-2">
-              <Button variant="outline" className="flex-1" onClick={clear} disabled={items.length === 0}>
+              <Button variant="outline" className="flex-1 hover:bg-primary/10 hover:text-destructive" onClick={clear} disabled={items.length === 0}>
                 Limpar
               </Button>
               <Button
@@ -77,7 +77,7 @@ export default function CartSheet({ open, onOpenChange }: { open: boolean; onOpe
                       .join("\n") + `\n\nSubtotal: ${money(subtotal)}`
                   );
                   console.log(msg, "mensagem");
-                  window.open(`https://wa.me/5581987428086?text=${msg}`, "_blank");
+                  window.open(`https://wa.me/5581992876549?text=${msg}`, "_blank");
                 }}
               >
                 Finalizar pelo WhatsApp
