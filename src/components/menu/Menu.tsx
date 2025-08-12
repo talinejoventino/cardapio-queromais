@@ -7,12 +7,15 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import ProductCard from "./ProductCard";
 import { Separator } from "@/components/ui/separator";
+import { useCart } from "@/stores/cart";
 
 type Props = { categories: Category[]; items: Item[] };
 
 export default function Menu({ categories, items }: Props) {
   const [tab, setTab] = useState<string>(categories[0]?.slug ?? "");
   const [q, setQ] = useState("");
+
+  const add = useCart((s) => s.add);
 
   const filtered = useMemo(() => {
     const text = q.trim().toLowerCase();
@@ -69,8 +72,19 @@ export default function Menu({ categories, items }: Props) {
                   description={it.description}
                   price={money(it.priceCents)}
                   imageUrl={it.imageUrl}
-                  unavailable={!it.isAvailable}
                   minOrder={it.minOrder}
+                  onAdd={(qty) =>
+                    add(
+                      {
+                        id: it.id,
+                        name: it.name,
+                        priceCents: it.priceCents,
+                        imageUrl: it.imageUrl,
+                        unit: it.unit,
+                      },
+                      qty
+                    )
+                  }
                 />
               </li>
             );

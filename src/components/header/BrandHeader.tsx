@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import CartButton from "../cart/CartButton";
 
 export default function BrandHeader() {
   return (
@@ -19,14 +20,15 @@ export default function BrandHeader() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <a
+          {/* <a
             href="https://wa.me/55XXXXXXXXXXX"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white text-[#A9672D] font-semibold px-4 py-2 rounded-lg shadow hover:bg-white/90 transition"
           >
             Peça Agora
-          </a>
+          </a> */}
+          <CartButton/>
           <a
             href="https://wa.me/55XXXXXXXXXXX"
             target="_blank"

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus, Minus } from "lucide-react";
+import { useCart } from "@/stores/cart";
 
 type Props = {
   title: string;
@@ -28,14 +29,12 @@ export default function ProductCard({
     <Card className={["flex flex-row items-stretch gap-4 p-4 rounded-xl shadow-sm hover:shadow-md transition bg-card",
       ].join(" ")}
     >
-      {/* thumb */}
       <div className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-lg">
         {imageUrl ? (
           <Image src={imageUrl} alt={title} fill className="object-cover" />
         ) : <div className="h-full w-full grid place-content-center text-xs text-muted-foreground">sem imagem</div>}
       </div>
 
-      {/* conteúdo */}
       <div className="flex flex-1 flex-col justify-between">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
@@ -51,7 +50,6 @@ export default function ProductCard({
           </div>
         </div>
 
-        {/* ações */}
         <div className="mt-3 flex items-center justify-end gap-2">
           <div className="flex items-center rounded-lg border border-border">
             <Button variant="ghost" size="icon" className="h-8 w-8" onClick={dec} aria-label="Diminuir"><Minus className="h-4 w-4" /></Button>

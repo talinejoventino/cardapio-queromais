@@ -1,4 +1,4 @@
-import BrandHeader from "@/components/BrandHeader";
+import BrandHeader from "@/components/header/BrandHeader";
 import { categories, items } from "@/data/menu";
 import Menu from "@/components/menu/Menu";
 
