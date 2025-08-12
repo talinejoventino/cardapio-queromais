@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "@/stores/cart";
 import CartSheet from "@/components/cart/CartSheet";
@@ -8,6 +8,11 @@ import CartSheet from "@/components/cart/CartSheet";
 export default function CartButton() {
   const total = useCart((s) => s.totalItems());
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -17,7 +22,7 @@ export default function CartButton() {
         aria-label="Abrir carrinho"
       >
         <ShoppingCart className="inline-block h-5 w-5 align-middle" />
-        {total > 0 && (
+        {mounted && total > 0 && (
           <span className="absolute -top-2 -right-2 rounded-full bg-red-600 text-white text-xs h-5 min-w-[20px] px-1 grid place-items-center">
             {total}
           </span>
