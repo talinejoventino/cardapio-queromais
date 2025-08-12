@@ -1,46 +1,68 @@
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+"use client";
 
-export default function ProductCard({
-  title, description, price, imageUrl, unavailable, unit, minOrder, tags,
-}: {
+import Image from "next/image";
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Plus, Minus } from "lucide-react";
+
+type Props = {
   title: string;
+  subtitle?: string;      
   description?: string;
   price: string;
+  oldPrice?: string;
   imageUrl?: string;
-  unavailable?: boolean;
-  unit?: string;
   minOrder?: number;
-  tags?: string[];
-}) {
-  return (
-    <Card className="overflow-hidden h-full">
-      {imageUrl ? (
-        <div className="relative h-40 w-full">
-          <Image src={imageUrl} alt={title} fill className="object-cover" />
-        </div>
-      ) : null}
-      <CardContent className="p-4 flex flex-col gap-2">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold leading-tight">{title}</h3>
-          <span className="font-bold shrink-0">{price}</span>
-        </div>
-        {description ? (
-          <p className="text-sm text-muted-foreground">{description}</p>
-        ) : null}
+  onAdd?: (qty: number) => void;
+};
 
-        <div className="flex flex-wrap gap-2">
-          {unit ? <Badge variant="secondary">{unit}</Badge> : null}
-          {typeof minOrder === "number" ? (
-            <Badge variant="outline">mín. {minOrder}</Badge>
-          ) : null}
-          {tags?.map((t) => (
-            <Badge key={t} variant="outline">{t}</Badge>
-          ))}
-          {unavailable ? <Badge variant="secondary">Indisponível</Badge> : null}
+export default function ProductCard({
+  title, subtitle, description, price, oldPrice, imageUrl, minOrder = 1, onAdd,
+}: Props) {
+  const [qty, setQty] = useState(minOrder);
+  const dec = () => setQty((q) => Math.max(minOrder, q - 1));
+  const inc = () => setQty((q) => q + 1);
+
+  return (
+    <Card className={["flex flex-row items-stretch gap-4 p-4 rounded-xl shadow-sm hover:shadow-md transition bg-card",
+      ].join(" ")}
+    >
+      {/* thumb */}
+      <div className="relative h-24 w-24 sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-lg">
+        {imageUrl ? (
+          <Image src={imageUrl} alt={title} fill className="object-cover" />
+        ) : <div className="h-full w-full grid place-content-center text-xs text-muted-foreground">sem imagem</div>}
+      </div>
+
+      {/* conteúdo */}
+      <div className="flex flex-1 flex-col justify-between">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h3 className="font-semibold leading-tight truncate">{title}</h3>
+            {subtitle && <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>}
+            {description && (
+              <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{description}</p>
+            )}
+          </div>
+          <div className="text-right shrink-0">
+            <div className="font-semibold text-[hsl(7,80%,40%)]">{price}</div>
+            {oldPrice && <div className="text-xs text-muted-foreground line-through">{oldPrice}</div>}
+          </div>
         </div>
-      </CardContent>
+
+        {/* ações */}
+        <div className="mt-3 flex items-center justify-end gap-2">
+          <div className="flex items-center rounded-lg border border-border">
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={dec} aria-label="Diminuir"><Minus className="h-4 w-4" /></Button>
+            <span className="w-8 text-center text-sm tabular-nums">{qty}</span>
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={inc} aria-label="Aumentar"><Plus className="h-4 w-4" /></Button>
+          </div>
+          <Button className="h-9 px-3 bg-primary text-primary-foreground hover:opacity-90" onClick={() => onAdd?.(qty)}>
+            Adicionar
+          </Button>
+        </div>
+      </div>
     </Card>
   );
 }

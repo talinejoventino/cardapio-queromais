@@ -8,7 +8,7 @@ export default function Page() {
     <main className="mx-auto max-w-6xl p-4 md:p-8">
       <BrandHeader />
       <section className="mt-4">
-        <div className="rounded-xl border p-4 md:p-6 bg-background">
+        <div className="rounded-xl border p-4 md:p-6 bg-white">
           <h2 className="text-xl md:text-2xl font-semibold">
             Cardápio Digital
           </h2>
@@ -18,7 +18,7 @@ export default function Page() {
         </div>
       </section>
       <footer className="text-xs text-muted-foreground mt-8">
-        Preços em BRL. Imagens ilustrativas.
+      © 2025 Todos direitos reservados.
       </footer>
     </main>
   );

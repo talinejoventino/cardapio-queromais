@@ -16,21 +16,27 @@ export default function Menu({ categories, items }: Props) {
 
   const filtered = useMemo(() => {
     const text = q.trim().toLowerCase();
-    const byCat = items.filter((i) => i.categorySlug === tab);
+    const byCat = items
+      .filter((i) => i.categorySlug === tab)
+      .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
     if (!text) return byCat;
     return byCat.filter(
       (i) =>
         i.name.toLowerCase().includes(text) ||
-        i.description?.toLowerCase().includes(text) ||
-        i.tags?.some((t) => t.toLowerCase().includes(text))
+        i.description?.toLowerCase().includes(text)
     );
   }, [items, tab, q]);
+
+  const cats = useMemo(
+    () => [...categories].sort((a, b) => a.order - b.order),
+    [categories]
+  );
 
   return (
     <>
       <Tabs value={tab} onValueChange={setTab} className="w-full">
         <TabsList className="flex w-full overflow-x-auto">
-          {categories.map((c) => (
+          {cats.map((c) => (
             <TabsTrigger key={c.slug} value={c.slug} className="whitespace-nowrap">
               {c.name}
             </TabsTrigger>
@@ -40,7 +46,7 @@ export default function Menu({ categories, items }: Props) {
 
       <div className="mt-4 flex gap-3 items-center">
         <Input
-          placeholder="Buscar (ex.: coxinha, assado, vegano...)"
+          placeholder="Buscar (ex.: coxinha, 1kg, 500g...)"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           className="w-full"
@@ -52,21 +58,23 @@ export default function Menu({ categories, items }: Props) {
       {filtered.length === 0 ? (
         <p className="text-muted-foreground">Nada encontrado.</p>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map((it) => (
-            <li key={it.id}>
-              <ProductCard
-                title={it.name}
-                description={it.description}
-                price={money(it.priceCents)}
-                imageUrl={it.imageUrl}
-                unavailable={!it.isAvailable}
-                unit={it.unit}
-                minOrder={it.minOrder}
-                tags={it.tags}
-              />
-            </li>
-          ))}
+        <ul className="flex flex-col gap-4">
+          {filtered.map((it) => {
+            const subtitle = it.unit ? it.unit : undefined; // ex.: "fardo 12x12un", "500g", "1kg", "10un (130g)"
+            return (
+              <li key={it.id}>
+                <ProductCard
+                  title={it.name}
+                  subtitle={subtitle}
+                  description={it.description}
+                  price={money(it.priceCents)}
+                  imageUrl={it.imageUrl}
+                  unavailable={!it.isAvailable}
+                  minOrder={it.minOrder}
+                />
+              </li>
+            );
+          })}
         </ul>
       )}
     </>
