@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, Check } from "lucide-react";
 import { useCart } from "@/stores/cart";
 
 type Props = {
@@ -22,8 +22,24 @@ export default function ProductCard({
   title, subtitle, description, price, oldPrice, imageUrl, minOrder = 1, onAdd,
 }: Props) {
   const [qty, setQty] = useState(minOrder);
+  const [showTooltip, setShowTooltip] = useState(false);
   const dec = () => setQty((q) => Math.max(minOrder, q - 1));
   const inc = () => setQty((q) => q + 1);
+
+  useEffect(() => {
+    if (showTooltip) {
+      const timer = setTimeout(() => {
+        setShowTooltip(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showTooltip]);
+
+  const handleAddToCart = () => {
+    onAdd?.(qty);
+    setShowTooltip(true);
+    setQty(minOrder);
+  };
 
   return (
     <Card className="flex flex-col sm:flex-row items-stretch gap-4 p-4 rounded-xl shadow-sm hover:shadow-md transition bg-white">
@@ -54,9 +70,21 @@ export default function ProductCard({
             <span className="w-8 text-center text-sm tabular-nums">{qty}</span>
             <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-primary" onClick={inc} aria-label="Aumentar"><Plus className="h-4 w-4" /></Button>
           </div>
-          <Button className="h-9 w-full sm:w-auto px-3 bg-primary text-primary-foreground hover:opacity-90" onClick={() => onAdd?.(qty)}>
-            Adicionar
-          </Button>
+          <div className="relative w-full sm:w-auto">
+            <Button 
+              className="h-9 w-full sm:w-auto px-3 bg-primary text-primary-foreground hover:opacity-90" 
+              onClick={handleAddToCart}
+            >
+              {showTooltip ? 'Adicionado' : 'Adicionar'}
+              {showTooltip && <Check className="ml-1 h-4 w-4" />}
+            </Button>
+            
+            {showTooltip && (
+              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-xs py-1 px-2 rounded shadow-md whitespace-nowrap animate-fade-in">
+                Produto adicionado!
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </Card>
