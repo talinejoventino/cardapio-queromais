@@ -12,10 +12,12 @@ export default async function ProtectedLayout({ children }: { children: ReactNod
 
   return (
     <div className="min-h-screen bg-muted/30">
-      <header className="bg-white border-b px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <span className="font-bold text-lg">Quero Mais · Admin</span>
-          <nav className="flex gap-4 text-sm">
+      <header className="bg-white border-b px-4 sm:px-6 py-3 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-3 sm:gap-6">
+          <span className="font-bold text-sm sm:text-lg whitespace-nowrap">
+            <span className="hidden sm:inline">Quero Mais · </span>Admin
+          </span>
+          <nav className="flex gap-3 sm:gap-4 text-sm">
             <Link href="/admin/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
               Produtos
             </Link>
@@ -26,7 +28,7 @@ export default async function ProtectedLayout({ children }: { children: ReactNod
         </div>
         <AdminLogoutButton />
       </header>
-      <main className="p-6 max-w-6xl mx-auto">{children}</main>
+      <main className="p-4 sm:p-6 max-w-6xl mx-auto">{children}</main>
     </div>
   );
 }

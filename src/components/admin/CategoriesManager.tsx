@@ -143,102 +143,109 @@ export default function CategoriesManager({
           </Button>
         </div>
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Nome</TableHead>
-              <TableHead>Slug</TableHead>
-              <TableHead className="text-center">Ordem</TableHead>
-              <TableHead className="text-center">Produtos</TableHead>
-              <TableHead className="text-right">Ações</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {categories.map((cat) =>
-              editingId === cat.id ? (
-                <TableRow key={cat.id}>
-                  <TableCell>
-                    <Input
-                      value={editName}
-                      onChange={(e) => setEditName(e.target.value)}
-                      className="h-8"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Input
-                      value={editSlug}
-                      onChange={(e) => setEditSlug(e.target.value)}
-                      className="h-8 font-mono text-sm"
-                    />
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <Input
-                      type="number"
-                      value={editOrder}
-                      onChange={(e) => setEditOrder(Number(e.target.value))}
-                      className="h-8 w-16 mx-auto text-center"
-                    />
-                  </TableCell>
-                  <TableCell className="text-center text-muted-foreground text-sm">
-                    {productCountBySlug[cat.slug] ?? 0}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex gap-1 justify-end">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => saveEdit(cat.id)}
-                        disabled={saving}
-                      >
-                        <Check className="h-4 w-4 text-green-600" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => setEditingId(null)}
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ) : (
-                <TableRow key={cat.id}>
-                  <TableCell className="font-medium">{cat.name}</TableCell>
-                  <TableCell className="font-mono text-sm text-muted-foreground">
-                    {cat.slug}
-                  </TableCell>
-                  <TableCell className="text-center">{cat.order}</TableCell>
-                  <TableCell className="text-center text-muted-foreground text-sm">
-                    {productCountBySlug[cat.slug] ?? 0}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex gap-1 justify-end">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => startEdit(cat)}
-                      >
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
-                        onClick={() => setDeleteId(cat.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              )
-            )}
-          </TableBody>
-        </Table>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Nome</TableHead>
+                <TableHead className="hidden sm:table-cell">Slug</TableHead>
+                <TableHead className="hidden sm:table-cell text-center">Ordem</TableHead>
+                <TableHead className="text-center">Produtos</TableHead>
+                <TableHead className="text-right">Ações</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {categories.map((cat) =>
+                editingId === cat.id ? (
+                  <TableRow key={cat.id}>
+                    <TableCell>
+                      <Input
+                        value={editName}
+                        onChange={(e) => setEditName(e.target.value)}
+                        className="h-8"
+                      />
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Input
+                        value={editSlug}
+                        onChange={(e) => setEditSlug(e.target.value)}
+                        className="h-8 font-mono text-sm"
+                      />
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell text-center">
+                      <Input
+                        type="number"
+                        value={editOrder}
+                        onChange={(e) => setEditOrder(Number(e.target.value))}
+                        className="h-8 w-16 mx-auto text-center"
+                      />
+                    </TableCell>
+                    <TableCell className="text-center text-muted-foreground text-sm">
+                      {productCountBySlug[cat.slug] ?? 0}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex gap-1 justify-end">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => saveEdit(cat.id)}
+                          disabled={saving}
+                        >
+                          <Check className="h-4 w-4 text-green-600" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => setEditingId(null)}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  <TableRow key={cat.id}>
+                    <TableCell>
+                      <div className="font-medium">{cat.name}</div>
+                      <div className="text-xs font-mono text-muted-foreground sm:hidden mt-0.5">
+                        {cat.slug}
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell font-mono text-sm text-muted-foreground">
+                      {cat.slug}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell text-center">{cat.order}</TableCell>
+                    <TableCell className="text-center text-muted-foreground text-sm">
+                      {productCountBySlug[cat.slug] ?? 0}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex gap-1 justify-end">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => startEdit(cat)}
+                        >
+                          <Pencil className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-destructive hover:text-destructive"
+                          onClick={() => setDeleteId(cat.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
       {/* Modal nova categoria */}

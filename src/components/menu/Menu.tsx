@@ -79,6 +79,7 @@ export default function Menu({ categories, items }: Props) {
                   price={money(it.priceCents)}
                   imageUrl={it.imageUrl}
                   minOrder={it.minOrder}
+                  priority={filtered.indexOf(it) === 0}
                   onAdd={(qty) =>
                     add(
                       {

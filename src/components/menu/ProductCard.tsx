@@ -9,20 +9,22 @@ import { useCart } from "@/stores/cart";
 
 type Props = {
   title: string;
-  subtitle?: string;      
+  subtitle?: string;
   description?: string;
   price: string;
   oldPrice?: string;
   imageUrl?: string;
   minOrder?: number;
+  priority?: boolean;
   onAdd?: (qty: number) => void;
 };
 
 export default function ProductCard({
-  title, subtitle, description, price, oldPrice, imageUrl, minOrder = 1, onAdd,
+  title, subtitle, description, price, oldPrice, imageUrl, minOrder = 1, priority = false, onAdd,
 }: Props) {
   const [qty, setQty] = useState(minOrder);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const dec = () => setQty((q) => Math.max(minOrder, q - 1));
   const inc = () => setQty((q) => q + 1);
 
@@ -43,9 +45,22 @@ export default function ProductCard({
 
   return (
     <Card className="flex flex-col sm:flex-row items-stretch gap-4 p-4 rounded-xl shadow-sm hover:shadow-md transition bg-white">
-      <div className="relative h-32 w-full sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-lg">
+      <div className="relative h-32 w-full sm:h-28 sm:w-28 shrink-0 overflow-hidden rounded-lg bg-muted">
         {imageUrl ? (
-          <Image src={imageUrl} alt={title} fill className="object-cover" />
+          <>
+            {!imgLoaded && (
+              <div className="absolute inset-0 bg-muted animate-pulse" />
+            )}
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
+              sizes="(min-width: 640px) 112px, calc(100vw - 4rem)"
+              className={`object-cover transition-opacity duration-300 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
+              priority={priority}
+              onLoad={() => setImgLoaded(true)}
+            />
+          </>
         ) : <div className="h-full w-full grid place-content-center text-xs text-muted-foreground">sem imagem</div>}
       </div>
 

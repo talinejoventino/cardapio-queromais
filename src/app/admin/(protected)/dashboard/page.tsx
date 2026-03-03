@@ -30,18 +30,18 @@ export default async function DashboardPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg border p-4">
-          <p className="text-sm text-muted-foreground">Total de produtos</p>
-          <p className="text-3xl font-bold mt-1">{total}</p>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="bg-white rounded-lg border p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Total de produtos</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-1">{total}</p>
         </div>
-        <div className="bg-white rounded-lg border p-4">
-          <p className="text-sm text-muted-foreground">Categorias</p>
-          <p className="text-3xl font-bold mt-1">{categories?.length ?? 0}</p>
+        <div className="bg-white rounded-lg border p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Categorias</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-1">{categories?.length ?? 0}</p>
         </div>
-        <div className="bg-white rounded-lg border p-4">
-          <p className="text-sm text-muted-foreground">Indisponíveis</p>
-          <p className="text-3xl font-bold mt-1 text-destructive">{unavailable}</p>
+        <div className="bg-white rounded-lg border p-3 sm:p-4">
+          <p className="text-xs sm:text-sm text-muted-foreground leading-tight">Indisponíveis</p>
+          <p className="text-2xl sm:text-3xl font-bold mt-1 text-destructive">{unavailable}</p>
         </div>
       </div>
 

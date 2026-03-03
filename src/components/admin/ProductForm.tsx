@@ -201,7 +201,7 @@ export default function ProductForm({
       </div>
 
       {/* Preço + Unidade */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="price">Preço (R$) *</Label>
           <Input
@@ -236,7 +236,7 @@ export default function ProductForm({
       </div>
 
       {/* Tags + Min Order */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <Label htmlFor="tags">Tags (separadas por vírgula)</Label>
           <Input
