@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Category, Item } from "@/data/menu";
-import { money } from "@/data/menu";
+import { money } from "@/lib/utils";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import ProductCard from "./ProductCard";

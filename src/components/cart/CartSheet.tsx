@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/stores/cart";
 import Image from "next/image";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { money } from "@/data/menu";
+import { money } from "@/lib/utils";
 
 export default function CartSheet({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void; }) {
   const { items, setQty, remove, clear, subtotalCents } = useCart();
