@@ -44,70 +44,70 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 1rem;
 
   /* Base */
-  --background: oklch(0.98 0.02 90);          /* Creme #FFFAF3 */
-  --foreground: oklch(0.15 0.02 50);          /* Marrom escuro */
+  --background: oklch(0.99 0.01 90);          /* Quase branco quente */
+  --foreground: oklch(0.12 0.02 50);          /* Marrom bem escuro */
 
   /* Card/Surface */
-  --card: oklch(0.96 0.015 90);               /* Bege claro */
-  --card-foreground: oklch(0.15 0.02 50);
+  --card: oklch(1 0 0);                       /* Branco puro */
+  --card-foreground: oklch(0.12 0.02 50);
 
   --popover: var(--card);
   --popover-foreground: var(--card-foreground);
 
-  /* Primária (Gold QueroMais) */
-  --primary: oklch(0.65 0.17 85); /* Ouro fechado */
-  --primary-foreground: oklch(0.98 0 95); /* Branco para texto */
+  /* Primária (Modern Gold) */
+  --primary: oklch(0.7 0.15 80);              /* Ouro mais vibrante e moderno */
+  --primary-foreground: oklch(0.98 0 0);      /* Branco neutro */
 
-  /* Secundária (Terracota forno) */
-  --secondary: oklch(0.65 0.12 50);           /* #A9672D */
-  --secondary-foreground: oklch(0.98 0 95);   /* branco */
+  /* Secundária (Warm Terracotta) */
+  --secondary: oklch(0.6 0.1 50);             /* Terracota refinado */
+  --secondary-foreground: oklch(0.98 0 0);
 
   /* Muted/Accent */
-  --muted: oklch(0.93 0.02 90);               /* bege suave */
-  --muted-foreground: oklch(0.4 0.02 50);     /* texto muted */
+  --muted: oklch(0.96 0.01 90);               /* Bege ultra leve */
+  --muted-foreground: oklch(0.45 0.02 50);    /* Texto secundário suave */
 
-  --accent: oklch(0.35 0.04 240);             /* Azul-petróleo #233742 */
-  --accent-foreground: oklch(0.98 0 95);      /* branco */
+  --accent: oklch(0.25 0.03 240);             /* Azul-petróleo profundo */
+  --accent-foreground: oklch(0.98 0 0);
 
   /* Erro */
-  --destructive: oklch(0.5 0.18 25);          /* vinho escuro */
-  --destructive-foreground: oklch(0.98 0 95); /* branco */
+  --destructive: oklch(0.55 0.15 25);         /* Vermelho elegante */
+  --destructive-foreground: oklch(0.98 0 0);
 
   /* Bordas / inputs */
-  --border: oklch(0.88 0.015 90);
+  --border: oklch(0.92 0.01 90);
   --input: var(--border);
   --ring: var(--primary);
 }
 
 .dark {
-  --background: oklch(0.15 0.02 50);          /* quase preto */
-  --foreground: oklch(0.98 0.02 90);          /* creme claro */
+  --background: oklch(0.12 0.015 50);         /* Cinza muito escuro quente */
+  --foreground: oklch(0.97 0.01 90);          /* Creme quase branco */
 
-  --card: oklch(0.18 0.02 50);
+  --card: oklch(0.15 0.02 50);                /* Superfície ligeiramente mais clara */
   --card-foreground: var(--foreground);
 
   --popover: var(--card);
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.75 0.18 85);
-  --primary-foreground: oklch(0.15 0.02 50);
+  --primary: oklch(0.75 0.15 85);             /* Dourado mais brilhante para dark */
+  --primary-foreground: oklch(0.12 0.015 50);
 
-  --secondary: oklch(0.7 0.1 50);
-  --secondary-foreground: oklch(0.15 0.02 50);
+  --secondary: oklch(0.65 0.08 50);
+  --secondary-foreground: oklch(0.12 0.015 50);
 
-  --muted: oklch(0.25 0.015 50);
-  --muted-foreground: oklch(0.7 0.02 80);
+  --muted: oklch(0.2 0.015 50);
+  --muted-foreground: oklch(0.75 0.01 80);
 
-  --accent: oklch(0.35 0.04 240);
-  --accent-foreground: oklch(0.98 0 95);
+  --accent: oklch(0.3 0.04 240);
+  --accent-foreground: oklch(0.98 0 0);
 
-  --destructive: oklch(0.5 0.18 25);
-  --destructive-foreground: oklch(0.98 0 95);
+  --destructive: oklch(0.5 0.15 25);
+  --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.25 0.015 50);
+  --border: oklch(0.22 0.015 50);
   --input: var(--border);
   --ring: var(--primary);
 }
@@ -146,5 +146,13 @@
   
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+
+  .dark .glass {
+    @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl;
   }
 }

@@ -48,30 +48,44 @@ export default async function Page() {
   const sortedCategories = [...categories].sort((a, b) => a.order - b.order);
 
   return (
-    <main className="mx-auto max-w-6xl p-4 md:p-8">
+    <main className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pb-20">
       <BrandHeader />
-      <section className="mt-4">
-        <div className="rounded-xl border p-4 md:p-6 bg-white">
-          <h2 className="text-xl md:text-2xl font-semibold">Cardápio Digital</h2>
-          <div className="mt-6">
-            {errorMessage ? (
-              <div className="flex flex-col items-center justify-center py-16 text-center gap-3">
-                <p className="text-lg font-medium text-destructive">
-                  Não foi possível carregar o cardápio
+      
+      <section className="mt-8 px-4 md:px-8 max-w-6xl mx-auto">
+        <div className="flex flex-col gap-1 mb-8">
+          <h2 className="text-3xl md:text-4xl font-black tracking-tight text-foreground">
+            Cardápio <span className="text-primary tracking-tighter">Digital</span>
+          </h2>
+          <div className="h-1.5 w-12 bg-primary rounded-full" />
+        </div>
+
+        <div className="mt-6">
+          {errorMessage ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center gap-4 glass rounded-3xl">
+              <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center text-destructive">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div>
+                <p className="text-xl font-bold text-foreground">
+                  Ops! Algo deu errado
                 </p>
-                <p className="text-sm text-muted-foreground max-w-sm">
-                  Tente recarregar a página. Se o problema persistir, entre em
-                  contato com a loja.
+                <p className="text-sm text-muted-foreground max-w-xs mt-1">
+                  Não foi possível carregar o cardápio. Tente recarregar a página ou entre em contato.
                 </p>
               </div>
-            ) : (
-              <Menu categories={sortedCategories} items={items} />
-            )}
-          </div>
+            </div>
+          ) : (
+            <Menu categories={sortedCategories} items={items} />
+          )}
         </div>
       </section>
-      <footer className="text-xs text-muted-foreground mt-8">
-        © 2025 Todos direitos reservados.
+
+      <footer className="max-w-6xl mx-auto px-8 mt-16 pb-8 border-t border-border/40 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground font-medium">
+        <p>© 2025 QueroMais. Todos os direitos reservados.</p>
+        <div className="flex items-center gap-6">
+          <a href="#" className="hover:text-primary transition-colors">Termos</a>
+          <a href="#" className="hover:text-primary transition-colors">Privacidade</a>
+        </div>
       </footer>
     </main>
   );
