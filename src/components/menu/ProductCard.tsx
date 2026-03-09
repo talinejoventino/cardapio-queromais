@@ -45,7 +45,7 @@ export default function ProductCard({
 
   return (
     <Card className="group relative flex flex-col sm:flex-row items-stretch gap-5 p-4 rounded-3xl border-none shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.15)] transition-all duration-300 bg-white">
-      <div className="relative h-44 w-full sm:h-32 sm:w-32 shrink-0 overflow-hidden rounded-2xl bg-muted">
+      <div className="relative h-64 w-full sm:h-32 sm:w-32 shrink-0 overflow-hidden rounded-2xl bg-muted">
         {imageUrl ? (
           <>
             {!imgLoaded && (
