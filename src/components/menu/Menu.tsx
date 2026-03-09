@@ -38,13 +38,16 @@ export default function Menu({ categories, items }: Props) {
   return (
     <>
       <Tabs value={tab} onValueChange={setTab} className="w-full">
-        <div className="w-full overflow-x-auto no-scrollbar scrollbar-hide py-2">
-          <TabsList className="inline-flex min-w-max gap-2 p-1 bg-muted/50 rounded-xl">
+        <div className="w-full py-2">
+          <TabsList className="flex flex-wrap gap-2 h-auto bg-transparent p-0">
             {cats.map((c) => (
               <TabsTrigger
                 key={c.slug}
                 value={c.slug}
-                className="whitespace-nowrap px-6 py-2.5 rounded-lg transition-all data-[state=active]:bg-white data-[state=active]:text-primary data-[state=active]:shadow-sm font-medium"
+                className="whitespace-nowrap px-5 py-2 rounded-full transition-all 
+                  data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md
+                  data-[state=inactive]:bg-muted/50 data-[state=inactive]:text-muted-foreground hover:data-[state=inactive]:bg-muted/80
+                  font-semibold text-sm border-none transition-all duration-300 active:scale-95"
               >
                 {c.name}
               </TabsTrigger>
